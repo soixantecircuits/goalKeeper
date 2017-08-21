@@ -1,0 +1,11 @@
+{
+  "server": {
+    "port" : 8987
+  },
+  "service": {
+    "spacebro": {
+      "host" : "127.0.0.1",
+      "port" : 8888,
+      "channelName": "goalKeeper"
+    }
+}
