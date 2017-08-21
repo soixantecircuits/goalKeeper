@@ -2,10 +2,25 @@
   "server": {
     "port" : 8987
   },
+  "folder": {
+    "logJson" : "log.json"
+  },
   "service": {
     "spacebro": {
       "host" : "127.0.0.1",
       "port" : 8888,
-      "channelName": "goalKeeper"
+      "channelName": "galaxy",
+      "client" : {
+        "name": "goalKeeper",
+        "description": "Stores mails that altruist failed to sent in a log file",
+        "in": {
+          "inMedia": {
+            "eventName": "unsent-mail",
+            "description": "Input media to process",
+            "type": "all"
+          }
+        }
+      }
     }
+  }
 }

@@ -4,25 +4,25 @@ var spaceBro = require('spacebro-client')
 var app = express()
 var moment = require('moment')
 var fs = require('fs')
+const settings = require('./settings/settings.json')
 
-spaceBro.connect('127.0.0.1', 8888,{
+spaceBro.connect(settings.service.spacebro.host, settings.service.spacebro.port,{
   clientName: os.hostname(),
-  channelName: 'galaxy',
+  channelName: settings.service.spacebro.channelName,
   verbose: true,
   sendBack: false
 })
 
-spaceBro.on('unsent-mail', function (data) {
+spaceBro.on(settings.service.spacebro.client.in.inMedia.eventName , function (data) {
   let datelog = moment()
   let prefix = '[' + datelog.format('YYYY-MM-DDTHH:mm:ss.SSSZ') + ']'
   
-  fs.appendFileSync('log.json', prefix + JSON.stringify(data) + '\n');
-  console.log('unsent-mail has been received')
+  fs.appendFileSync(settings.folder.logJson, prefix + JSON.stringify(data) + '\n');
 })
     
 app.use('/', express.static(__dirname));
 
-app.listen(8987, function() {
-  console.log('listening on port: 8987');
+app.listen(settings.server.port, function() {
+  console.log('listening on port: ' + settings.server.port);
 });
 
